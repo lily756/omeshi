@@ -1,0 +1,28 @@
+<%- include('header.ejs', {title: title }); %>
+  <div class="container cardLists">
+    <div class="row">
+      <div class="col-md-12">
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Title</th>
+                <th scope="col">Ingredients</th>
+                <th scope="col">Steps</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+                <% recipes.forEach((element,index) => {%>
+                    <tr>
+                        <td><%=element.title %></td>
+                        <td><%=element.ingredients %></td>
+                        <td><%=element.steps %></td>
+                        <td><button id="<%=element._id %>" type="button" <%= element.active?'disabled':'' %> class="btn btn-primary" onclick="taberu('<%=element._id %>')">add to menu</button></td>
+                      </tr>
+                <%}); %>
+            </tbody>
+          </table>
+      </div>
+    </div>
+  </div>
+  <%- include('footer.ejs', {title: title }); %>

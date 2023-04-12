@@ -1,0 +1,71 @@
+<%- include('header.ejs', {title: title }); %>
+  <div class="container cardLists">
+    <div class="row">
+      <% activeRecipe.forEach(element=> {%>
+        <div class="col-md-6" id="<%= element._id %>">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">
+                <%= element.title %>
+              </h5>
+              <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home<%= element.uuid %>"
+                    type="button" role="tab" aria-controls="home<%= element.uuid %>" aria-selected="true">
+                    材料
+                  </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile<%= element.uuid %>" type="button"
+                    role="tab" aria-controls="profile<%= element.uuid %>" aria-selected="false">
+                    做法
+                  </button>
+                </li>
+              </ul>
+              <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="home<%= element.uuid %>" role="tabpanel" aria-labelledby="home-tab">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">组合</th>
+                        <th scope="col">材料</th>
+                        <th scope="col">用量</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% element.ingredients.forEach(e=> { %>
+                        <tr>
+                          <th scope="row"><%= e.group? e.group:'' %></th>
+                          <td><%= e.name %></td>
+                          <td><%= e.quantity?e.quantity+e.unit:'逝量' %></td>
+                        </tr>
+                        <%});%>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="tab-pane fade" id="profile<%= element.uuid %>" role="tabpanel" aria-labelledby="profile-tab">
+                  <table class="table">
+                    <tbody>
+                      
+                        <% element.steps.forEach(e => {%>
+                          <tr><td><%if(e.type === 'timer'){%>
+                              <button id="<%= element.uuid + '_' + e.id %>" class="btn btn-primary" type="button" onclick="setCounter('<%= element.uuid + `_` + e.id %>','<%= e.time %>')"><%= e.text %></button>
+                            <%}else if(e.type === 'step'){%>
+                              <%= e.text %>
+                              <%}%></td></tr>
+                          <%}); %>
+                      
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <button class="btn btn-primary" onclick="cocked('<%= element._id %>')">Done</button>
+            </div>
+          </div>
+        </div>
+        <%}); %>
+    </div>
+  </div>
+  <%- include('footer.ejs', {title: title }); %>

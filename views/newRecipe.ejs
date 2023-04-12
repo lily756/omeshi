@@ -1,0 +1,34 @@
+<%- include('header.ejs', {title: title }); %>
+  <div class="container cardLists">
+    <div class="row">
+      <div class="col-md-12">
+        <form method="post">
+          <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" class="form-control" id="title" name="title">
+            <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+          </div>
+          <div class="mb-3">
+            <label for="Content" class="form-label">Content</label>
+            <textarea name="content" id="Content" class="form-control" ></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="Ingredients" class="form-label">Ingredients</label>
+            <textarea name="ingredients" id="Ingredients" class="form-control" ></textarea>
+            <label for="Ingredients" class="form-label">name quantity unit or group name quantity unit or just name</label>
+          </div>
+          <div class="mb-3">
+            <label for="Steps" class="form-label">Steps</label>
+            <textarea name="steps" id="Steps" class="form-control" ></textarea>
+            <label for="Steps" class="form-label">before line in - is a timer, - 123456 mean 12 hours 34 minuts 56 seconds</label>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+
+  </script>
+  <%- include('footer.ejs', {title: title }); %>
