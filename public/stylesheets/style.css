@@ -9,10 +9,10 @@ a {
 
 .nativebar {
   /* margin-bottom: 1rem; */
-  position:fixed;
+  position: fixed;
   left: 0;
   right: 0;
-  top:0;
+  top: 0;
   z-index: 999;
 }
 
@@ -21,9 +21,16 @@ a {
 }
 
 .card {
-  margin-bottom:1rem;
+  margin-bottom: 1rem;
 }
 
-:root{
-  --bs-blue:#0d6efd75
+:root {
+  --bs-blue: #0d6efd75
+}
+
+.recipes {
+  max-width: 40rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis ellipsis;
 }

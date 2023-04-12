@@ -14,9 +14,9 @@
             <tbody>
                 <% recipes.forEach((element,index) => {%>
                     <tr>
-                        <td><%=element.title %></td>
-                        <td><%=element.ingredients %></td>
-                        <td><%=element.steps %></td>
+                        <td class="recipes"><%=element.title %></td>
+                        <td class="recipes"><%=element.ingredients %></td>
+                        <td class="recipes"><%=element.steps %></td>
                         <td>
                           <button id="<%=element._id %>" type="button" <%= element.active?'disabled':'' %> class="btn btn-primary" onclick="taberu('<%=element._id %>')">Add</button>
                           <!-- <button id="<%=element._id %>" type="button" <%= element.active?'disabled':'' %> class="btn btn-primary" onclick="taberu('<%=element._id %>')">Delete</button> -->
