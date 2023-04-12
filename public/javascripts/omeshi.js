@@ -22,9 +22,13 @@ function taberu(id) {
 
 let counter = []
 let timeOutCounter = 0;
-let audio = new Audio('/media/ティロリサウンド.mp3')
+// let audio = new Audio('/media/ティロリサウンド.mp3')
+let audio = null
 
 function setCounter(id, time) {
+    if(!audio){
+        audio = new Audio('/media/ティロリサウンド.mp3')
+    }
     let target = counter.findIndex(v => (v.id === id))
     if (target >= 0) {
         if (counter[target].timeOut) {//timeoutnotice off -> stop -> clean
@@ -38,16 +42,18 @@ function setCounter(id, time) {
                 let timerText = `计时器: ${Hours}:${Minuts}:${Seconds}`
                 document.getElementById(counter[target].id).innerText = timerText
                 // delete counter[target]
-                counter.splice(target,1)
+                counter.splice(target, 1)
                 return
             }
             // counter[target].timeOut = false
             counter[target].pause = true
             if (timeOutCounter <= 0) {
-                audio.pause()
-                audio.currentTime = 0
+                if (audio) {
+                    audio.pause()
+                    audio.currentTime = 0
+                }
             }
-        }else{
+        } else {
             counter[target].pause = !counter[target].pause
         }
     } else {
@@ -71,7 +77,9 @@ function updateCounter() {
             }
             if (v.second === -1) {
                 timeOutCounter += 1;
-                audio.play()
+                if (audio) {
+                    audio.play();
+                }
             }
             let Hours = parseInt(second / 3600)
             let Minuts = parseInt((second - (Hours * 3600)) / 60)
@@ -84,9 +92,9 @@ function updateCounter() {
 
 setInterval(updateCounter, 1000);
 
-function cocked(id){
-    fetch('/done',{
-        method:'POST',
+function cocked(id) {
+    fetch('/done', {
+        method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
@@ -94,12 +102,12 @@ function cocked(id){
             id: id
         })
     }).then((response) => response.json())
-    .then((data) => {
-        if (data.err === '') {
-            document.getElementById(id).remove()
-        }
-    })
-    .catch((error) => {
-        console.error('Error:', error);
-    })
+        .then((data) => {
+            if (data.err === '') {
+                document.getElementById(id).remove()
+            }
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        })
 }
